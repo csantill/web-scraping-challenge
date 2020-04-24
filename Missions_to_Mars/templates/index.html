@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission to Mars</title>
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <main role="main">
+        <section class="jumbotron text-xs-center" style="background-image: url('/static/img/mission_to_mars.jpg');">
+            <div class="container">
+                <h1 class="jumbotron-heading">Mission to Mars</h1>
+                <p>
+                    <a href="/scrape" class="btn btn-secondary my-2">Scrape Data</a>
+                </p>
+            </div>
+        </section>
+
+        <div class="album1 py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-12 box-shadow">
+                            <div class="card-body">
+                                <h2>Latest Mars News</h2>
+                                <p class="card-text"><b>{{news_data.title}}</b></p>
+                                <p class="card-text">{{news_data.paragraph}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="album2 py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2 class="card-title">Featured Mars Image</h2>
+                        <div class="card mb-7 box-shadow">
+                            <img class="card-img-top" src={{featured_image.featured_url}} style="max-width:80%; max-height: 80%;" alt="Card image cap">
+                            {{featured_image.featured_desc}}
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col1">
+                            <h4 class="card-title">Current Weather on Mars</h4>
+                            <div class="card mb-5 box-shadow">
+                                <div class="card-body">
+                                    <p class="card-text">{{weather}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h4 class="card-title">Mars Facts</h4>
+                            {{mars_facts|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="album3 py-5 bg-light">
+            <div class="container text-center">
+                <h2>Mars Hemispheres</h2>
+                <div class="row">
+                    {% for dict_item in hemisphere_image_urls %}
+                          <div class="col-md-6">
+                                <div class="card mb-6 box-shadow">
+                                    <img class="card-img-top" src={{dict_item.img_url}} alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">{{dict_item.title}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
