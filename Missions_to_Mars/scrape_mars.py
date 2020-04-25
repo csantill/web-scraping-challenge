@@ -48,7 +48,7 @@ def marsNews(browser):
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html,"html.parser")
-    time.sleep(10) # Need to wait for page to load for some reason
+    time.sleep(5) # Need to wait for page to load
 
     article_list = soup.find('ul',class_='item_list')
     latest_title = article_list.find("div",class_="content_title").text
@@ -83,17 +83,18 @@ def marsFeaturedImageURL(browser):
 def marsTwitterWeather(browser):
     weather_url = 'https://twitter.com/marswxreport?lang=en'
     browser.visit(weather_url)
+    time.sleep(10)
     html = browser.html
-
     # Parse HTML with Beautiful Soup
     soup = BeautifulSoup(html, 'html.parser')
-
-    ## TODO --- Need to figure out how to parse twitter
-
-    mars_weather="""
-    InSight sol 498 (2020-04-21) low -94.3ºC (-137.7ºF) high -5.7ºC (21.8ºF)
-    winds from the SW at 5.0 m/s (11.3 mph) gusting to 16.6 m/s (37.2 mph)
-    pressure at 6.60 hPa"""
+    
+    article = soup.find('article')
+    mars_weather = article.find('div',lang="en").span.text
+    print(mars_weather)
+    # mars_weather="""
+    # InSight sol 498 (2020-04-21) low -94.3ºC (-137.7ºF) high -5.7ºC (21.8ºF)
+    # winds from the SW at 5.0 m/s (11.3 mph) gusting to 16.6 m/s (37.2 mph)
+    # pressure at 6.60 hPa"""
 
     return mars_weather
 
@@ -112,6 +113,7 @@ def marsHemisphereImageURLs(browser):
     print("Hemisphere")
     hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(hemispheres_url)
+    # The usgs sometimes fails even waiting some time, may need to retry
     time.sleep(10) 
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
